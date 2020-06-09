@@ -1,4 +1,4 @@
-# yuncoreserver environment
+# cloudnetlotserver environment
 # version 2.0.0
 #author waljqiang<waljqiang@163.com>
 
@@ -13,10 +13,8 @@ ENV LANG C.UTF-8
 ADD ./nginx/nginx-1.6.2.tar.gz ./
 COPY ./nginx/nginx.conf ./nginx.conf
 COPY ./nginx/default.conf ./default.conf
-COPY ./nginx/yuncore.conf ./yuncore.conf
-COPY ./nginx/yuncorebackend.conf ./yuncorebackend.conf
-COPY ./nginx/yunwifi.conf ./yunwifi.conf
-COPY ./nginx/yunwifibackend.conf ./yunwifibackend.conf
+COPY ./nginx/cloudnetlot.conf ./cloudnetlot.conf
+COPY ./nginx/cloudnetlotbackend.conf ./cloudnetlotbackend.conf
 COPY ./nginx/nginx ./nginx
 ADD ./php/php-5.6.38.tar.gz ./
 COPY ./php/php-fpm ./
@@ -25,7 +23,7 @@ COPY ./php/www.conf ./
 ADD ./php/php-beast-master.tar.gz ./
 ADD ./php/redis-2.2.8.tgz ./
 COPY ./script/supervisord.conf /usr/local/
-COPY ./script/startyuncoreserver.sh /usr/local/
+COPY ./script/startcloudnetlotserver.sh /usr/local/
 
 #vim
 RUN apt-get update \
@@ -41,13 +39,11 @@ RUN cd ./nginx-1.6.2 \
 	&& mkdir -p /var/lib/nginx/body \
 	&& cd /etc/nginx \
 	&& mkdir conf.d \
-	&& mkdir yuncore.conf \
+	&& mkdir cloudnetlot.conf \
 	&& cp /usr/local/docker/nginx.conf /etc/nginx/ \
 	&& cp /usr/local/docker/default.conf /etc/nginx/conf.d/ \
-	&& cp /usr/local/docker/yuncore.conf /etc/nginx/yuncore.conf/ \
-	&& cp /usr/local/docker/yuncorebackend.conf /etc/nginx/yuncore.conf/ \
-	&& cp /usr/local/docker/yunwifi.conf /etc/nginx/yuncore.conf/ \
-	&& cp /usr/local/docker/yunwifibackend.conf /etc/nginx/yuncore.conf/ \
+	&& cp /usr/local/docker/cloudnetlot.conf /etc/nginx/cloudnetlot.conf/ \
+	&& cp /usr/local/docker/cloudnetlotbackend.conf /etc/nginx/cloudnetlot.conf/ \
 	&& ln -s /usr/share/nginx/sbin/nginx /usr/sbin/nginx \
 	&& cp /usr/local/docker/nginx /etc/init.d/nginx \
 	&& chmod a+x /etc/init.d/nginx \
@@ -94,7 +90,7 @@ RUN echo "include /etc/ld.so.conf.d/*.conf" | sudo tee /etc/ld.so.conf \
 	&& make install \
 	&& make clean \
 	&& echo -e "; configuration for php redis module\n; priority=10\nextension=redis.so" | sudo tee /etc/php/5.6/mods-available/20-redis.ini \
-	&& chmod 755 /usr/local/startyuncoreserver.sh
+	&& chmod 755 /usr/local/startcloudnetlotserver.sh
 
 #clear
 RUN rm -rf /usr/local/docker \
@@ -107,4 +103,4 @@ WORKDIR /usr/local/www
 
 EXPOSE 80
 
-ENTRYPOINT ["/bin/bash", "/usr/local/startyuncoreserver.sh"]
+ENTRYPOINT ["/bin/bash", "/usr/local/startcloudnetlotserver.sh"]
