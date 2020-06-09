@@ -61,11 +61,11 @@ case "$1" in
 	if [[ "${SERVER[@]}" =~ "cloudnetlotdata" ]];then
             startServer "cloudnetlotdata"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotdaemon" ]];then
-	    startServer "yuncoredaemon"
+	    startServer "cloudnetlotdaemon"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotvsftpd" ]];then
-	    startServer "yuncorevsftpd"
+	    startServer "cloudnetlotvsftpd"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotserver" ]];then
-	    startServer "yuncoreserver"
+	    startServer "cloudnetlotserver"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotencode" ]];then
 	    startServer "cloudnetlotencode"
 	else
