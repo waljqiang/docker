@@ -1,4 +1,4 @@
-# yuncoredaemon environment
+# cloudnetlotdaemon environment
 # version 1.0.0
 #author waljqiang<waljqiang@163.com>
 
