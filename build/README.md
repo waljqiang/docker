@@ -5,7 +5,7 @@
 * 启动命令
 
     ```
-    docker run --name yuncoredaemon -p 9091:9091 -p 9092:9092 -p 9093:9093 -v /usr/local/yuncore/yuncoredaemon/php:/etc/php/7.1.20 -v /usr/local/yuncore/www/yuncoredaemon:/usr/local/www/yuncoredaemon --restart=no -it -d waljqiang/yuncoredaemon:1.0.0
+    docker run --name cloudnetlotdaemon -p 9091:9091 -p 9092:9092 -p 9093:9093 -v /usr/local/cloudnetlot/cloudnetlotdaemon/php:/etc/php/7.1.20 -v /usr/local/cloudnetlot/www/cloudnetlotdaemon:/usr/local/www/cloudnetlotdaemon --restart=no -it -d waljqiang/cloudnetlotdaemon:1.0.0
     
     restart(重启策略)
         no,容器退出时不重启容器
@@ -16,7 +16,7 @@
 * 镜像制作
     
     ```
-        docker build -t waljqiang/yuncoredaemon:1.0.0  ./
+        docker build -t waljqiang/cloudnetlotdaemon:1.0.0  ./
     ```
 
 * 查看docker占用磁盘大小
@@ -58,21 +58,21 @@
     ENV LANG C.UTF-8
     ```
 
-## yuncoredaemon
+## cloudnetlotdaemon
 
 * tag命名
  
-    yuncoredaemon镜像以1.x.y命名；x表示大版本，y表示小版本
+    cloudnetlotdaemon镜像以1.x.y命名；x表示大版本，y表示小版本
 
 * build镜像
  
     如果要改动镜像，修改Dockerfile文件，然后从新执行build命令即可。
 
     ```
-    docker build -t waljqiang/yuncoredaemon:1.0.0  ./
+    docker build -t waljqiang/cloudnetlotdaemon:1.0.0  ./
     ```
 
-    Dockerfile的from可以基于已有的yuncoredaemon镜像基础做修改,build命令注意镜像的tag需要改动.
+    Dockerfile的from可以基于已有的cloudnetlotdaemon镜像基础做修改,build命令注意镜像的tag需要改动.
 
 * 说明
  
@@ -99,24 +99,24 @@
 * 运行镜像
 
     ```
-    docker run --name yuncoredaemon -p 9091:9091 -p 9092:9092 -p 9093:9093 -v /usr/local/yuncore/yuncoredaemon/php:/etc/php/7.1.20 -v /usr/local/yuncore/www/yuncoredaemon:/usr/local/www/yuncoredaemon -v /etc/localtime:/etc/localtime:ro --restart=always -it -d waljqiang/yuncoredaemon:1.0.0
+    docker run --name cloudnetlotdaemon -p 9091:9091 -p 9092:9092 -p 9093:9093 -v /usr/local/cloudnetlot/cloudnetlotdaemon/php:/etc/php/7.1.20 -v /usr/local/cloudnetlot/www/cloudnetlotdaemon:/usr/local/www/cloudnetlotdaemon -v /etc/localtime:/etc/localtime:ro --restart=always -it -d waljqiang/cloudnetlotdaemon:1.0.0
     ```
 
-## yuncoreserver
+## cloudnetlotserver
 
 * tag命名
  
-    yuncoreserver镜像以2.x.y命名；x表示大版本，y表示小版本
+    cloudnetlotserver镜像以2.x.y命名；x表示大版本，y表示小版本
 
 * build镜像
  
     如果要改动镜像，修改Dockerfile文件，然后从新执行build命令即可。
 
     ```
-    docker build -t waljqiang/yuncoreserver:2.0.0  ./
+    docker build -t waljqiang/cloudnetlotserver:2.0.0  ./
     ```
 
-    Dockerfile的from可以基于已有的yuncoredaemon镜像基础做修改,build命令注意镜像的tag需要改动.
+    Dockerfile的from可以基于已有的cloudnetlotdaemon镜像基础做修改,build命令注意镜像的tag需要改动.
 
 * 说明
  
@@ -139,24 +139,24 @@
 * 运行镜像
 
     ```
-    docker run --name yuncoreserver -p 9090:80 -v /usr/local/yuncore/yuncoreserver/nginx:/etc/nginx -v /usr/local/yuncore/yuncoreserver/php:/etc/php/5.6 -v /usr/local/yuncore/www:/usr/local/www -v /etc/localtime:/etc/localtime:ro --restart=always -it -d waljqiang/yuncoreserver:2.0.0
+    docker run --name cloudnetlotserver -p 9090:80 -v /usr/local/cloudnetlot/cloudnetlotserver/nginx:/etc/nginx -v /usr/local/cloudnetlot/cloudnetlotserver/php:/etc/php/5.6 -v /usr/local/cloudnetlot/www:/usr/local/www -v /etc/localtime:/etc/localtime:ro --restart=always -it -d waljqiang/cloudnetlotserver:2.0.0
     ```
 
-## yuncoredata
+## cloudnetlotdata
 
 * tag命名
  
-    yuncoredata镜像以3.x.y命名；x表示大版本，y表示小版本
+    cloudnetlotdata镜像以3.x.y命名；x表示大版本，y表示小版本
 
 * build镜像
  
     如果要改动镜像，修改Dockerfile文件，然后从新执行build命令即可。
 
     ```
-    docker build -t waljqiang/yuncoredata:3.0.0  ./
+    docker build -t waljqiang/cloudnetlotdata:3.0.0  ./
     ```
 
-    Dockerfile的from可以基于已有的yuncoredaemon镜像基础做修改,build命令注意镜像的tag需要改动.
+    Dockerfile的from可以基于已有的cloudnetlotdaemon镜像基础做修改,build命令注意镜像的tag需要改动.
 
 * 说明
  
@@ -185,27 +185,27 @@
 * 运行镜像
 
     ```
-    docker run --name yuncoredata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -v /usr/local/yuncore/yuncoredata/mysql/conf:/etc/mysql -v /usr/local/yuncore/yuncoredata/mysql/data:/var/lib/mysql -v /usr/local/yuncore/yuncoredata/redis/:/etc/redis -v /usr/local/yuncore/yuncoredata/emqttd:/etc/emqttd -v /etc/localtime:/etc/localtime:ro --restart=always -it -d waljqiang/yuncoredata:3.0.0
+    docker run --name cloudnetlotdata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -v /usr/local/cloudnetlot/cloudnetlotdata/mysql/conf:/etc/mysql -v /usr/local/cloudnetlot/cloudnetlotdata/mysql/data:/var/lib/mysql -v /usr/local/cloudnetlot/cloudnetlotdata/redis/:/etc/redis -v /usr/local/cloudnetlot/cloudnetlotdata/emqttd:/etc/emqttd -v /etc/localtime:/etc/localtime:ro --restart=always -it -d waljqiang/cloudnetlotdata:3.0.0
     ```
 
 * 备注
   mysql安装包由于太大没有上传，请自行下载mysql-server_5.7.22-1ubuntu14.04_amd64.deb-bundle.tar
 
-## yuncorevsftpd
+## cloudnetlotvsftpd
 
 * tag命名
  
-    yuncorevsftpd镜像以4.x.y命名；x表示大版本，y表示小版本
+    cloudnetlotvsftpd镜像以4.x.y命名；x表示大版本，y表示小版本
 
 * build镜像
  
     如果要改动镜像，修改Dockerfile文件，然后从新执行build命令即可。
 
     ```
-    docker build -t waljqiang/yuncorevsftpd:4.0.0  ./
+    docker build -t waljqiang/cloudnetlotvsftpd:4.0.0  ./
     ```
 
-    yuncorevsftpd,build命令注意镜像的tag需要改动.
+    cloudnetlotvsftpd,build命令注意镜像的tag需要改动.
 
 * 说明
  
@@ -226,24 +226,24 @@
 * 运行镜像
 
     ```
-    docker run -d --name yuncorevsftpd -p 20:20 -p 21:21 -p 21100-21110:21100-21110 -v /home/vsftpd:/home/vsftpd -v /usr/local/yuncore/yuncorevsftpd:/etc/vsftpd -v /etc/localtime:/etc/localtime:ro -e FTP_USER=ftpuser -e FTP_PASS=123456 -e PASV_ADDRESS=$1 -e PASV_MIN_PORT=21100 -e PASV_MAX_PORT=21110  --restart=always waljqiang/yuncorevsftpd:4.0.0
+    docker run -d --name cloudnetlotvsftpd -p 20:20 -p 21:21 -p 21100-21110:21100-21110 -v /home/vsftpd:/home/vsftpd -v /usr/local/cloudnetlot/cloudnetlotvsftpd:/etc/vsftpd -v /etc/localtime:/etc/localtime:ro -e FTP_USER=ftpuser -e FTP_PASS=123456 -e PASV_ADDRESS=$1 -e PASV_MIN_PORT=21100 -e PASV_MAX_PORT=21110  --restart=always waljqiang/cloudnetlotvsftpd:4.0.0
     ```
 
-## yuncoreencode
+## cloudnetlotencode
 
 * tag命名
  
-    yuncoreencode镜像以5.x.y命名；x表示大版本，y表示小版本
+    cloudnetlotencode镜像以5.x.y命名；x表示大版本，y表示小版本
 
 * build镜像
  
     如果要改动镜像，修改Dockerfile文件，然后从新执行build命令即可。
 
     ```
-    docker build -t waljqiang/yuncoreencode:5.0.0  ./
+    docker build -t waljqiang/cloudnetlotencode:5.0.0  ./
     ```
 
-    Dockerfile的from可以基于已有的yuncoredaemon镜像基础做修改,build命令注意镜像的tag需要改动.
+    Dockerfile的from可以基于已有的cloudnetlotdaemon镜像基础做修改,build命令注意镜像的tag需要改动.
 
 * 说明
  
@@ -264,7 +264,7 @@
 * 运行镜像
 
     ```
-    docker run --name yuncoreencode -v /usr/local/yuncore/yuncoreencode/php5:/etc/php/5.6 -v /usr/local/yuncore/yuncoreencode/php7:/etc/php/7.1 -v /usr/local/yuncore/yuncoreencode/phpbeast:/usr/local/php-beast-master/tools -v /etc/localtime:/etc/localtime:ro --restart=always -it -d waljqiang/yuncoreencode:5.0.0
+    docker run --name cloudnetlotencode -v /usr/local/cloudnetlot/cloudnetlotencode/php5:/etc/php/5.6 -v /usr/local/cloudnetlot/cloudnetlotencode/php7:/etc/php/7.1 -v /usr/local/cloudnetlot/cloudnetlotencode/phpbeast:/usr/local/php-beast-master/tools -v /etc/localtime:/etc/localtime:ro --restart=always -it -d waljqiang/cloudnetlotencode:5.0.0
     ```
 
 * 使用

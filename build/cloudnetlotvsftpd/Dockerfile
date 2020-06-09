@@ -1,4 +1,4 @@
-# yuncorevsftpd environment
+# cloudnetlotvsftpd environment
 # version 4.0.0
 #author waljqiang<waljqiang@163.com>
 
