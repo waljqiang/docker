@@ -1,4 +1,5 @@
 #!/bin/bash
+BASE="/usr/local/cloudnetlot"
 startServer(){
     tmp=`docker ps |grep "$1"`
     if [ ! -z "$tmp" ];then
@@ -6,7 +7,7 @@ startServer(){
     else
 	tmp=`docker ps -a | grep "$1"`
 	if [ ! -z "$tmp" ];then
-	    if [[ "$1" = "cloudnetlotdaemon" ]] && [[ -f "../www/cloudnetlotdaemon/bin/start_swoole_server.php" ]];then
+	    if [[ "$1" = "cloudnetlotdaemon" ]] && [[ -f "$2/www/cloudnetlotdaemon/bin/start_swoole_server.php" ]];then
 		docker start $1 && docker exec -it cloudnetlotdaemon /bin/bash -c "php /usr/local/www/cloudnetlotdaemon/bin/start_swoole_server.php start -d"
 	    else
 	        docker start $1
@@ -22,7 +23,7 @@ restartServer(){
     if [ ! -z "$tmp" ];then
 	tmp=`docker ps | grep "$1"`
 	if [ ! -z "$tmp" ];then
-	    if [[ "$1" == "cloudnetlotdaemon" ]] && [[ -f "../www/cloudnetlotdaemon/bin/start_swoole_server.php" ]];then
+	    if [[ "$1" == "cloudnetlotdaemon" ]] && [[ -f "$2/www/cloudnetlotdaemon/bin/start_swoole_server.php" ]];then
 		docker restart $1 && docker exec -it cloudnetlotdaemon /bin/bash -c "php /usr/local/www/cloudnetlotdaemon/bin/start_swoole_server.php start -d"
 	    else
 	        docker restart $1
@@ -61,7 +62,7 @@ case "$1" in
 	if [[ "${SERVER[@]}" =~ "cloudnetlotdata" ]];then
             startServer "cloudnetlotdata"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotdaemon" ]];then
-	    startServer "cloudnetlotdaemon"
+	    startServer "cloudnetlotdaemon" "${BASE}"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotvsftpd" ]];then
 	    startServer "cloudnetlotvsftpd"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotserver" ]];then
@@ -71,7 +72,7 @@ case "$1" in
 	else
 	    startServer "cloudnetlotdata"
 	    sleep 1
-	    startServer "cloudnetlotdaemon"
+	    startServer "cloudnetlotdaemon" "${BASE}"
 	    startServer "cloudnetlotvsftpd"
 	    startServer "cloudnetlotserver"
 	    startServer "cloudnetlotencode"
@@ -81,7 +82,7 @@ case "$1" in
 	if [[ "${SERVER[@]}" =~ "cloudnetlotdata" ]];then
 	    restartServer "cloudnetlotdata"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotdaemon" ]];then
-            restartServer "cloudnetlotdaemon"
+            restartServer "cloudnetlotdaemon" "${BASE}"
         elif [[ "${SERVER[@]}" =~ "cloudnetlotvsftpd" ]];then
             restartServer "cloudnetlotvsftpd" 
         elif [[ "${SERVER[@]}" =~ "cloudnetlotserver" ]];then
@@ -91,7 +92,7 @@ case "$1" in
 	else
 	    restartServer "cloudnetlotdata"
 	    sleep 1
-            restartServer "cloudnetlotdaemon"
+            restartServer "cloudnetlotdaemon" "${BASE}"
             restartServer "cloudnetlotvsftpd"
             restartServer "cloudnetlotserver"
             restartServer "cloudnetlotencode"
