@@ -1,13 +1,13 @@
 {
     "registry-mirrors":[
-	"https://registry.docker-cn.com",
-	"https://docker.mirrors.ustc.edu.cn",
-	"https://hub-mirror.c.163.com",
+    	"https://registry.docker-cn.com",
+    	"https://docker.mirrors.ustc.edu.cn",
+    	"https://hub-mirror.c.163.com",
         "https://reg-mirror.qiniu.com"
     ],
     "log-driver":"json-file",
     "log-opts": {
-	"max-size":"500m",
-	"max-file":"3"
+    	"max-size":"500m",
+    	"max-file":"3"
     }
 }
