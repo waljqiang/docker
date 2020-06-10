@@ -54,7 +54,7 @@ else
 fi
 echo "----------------------------------运行cloudnetlotencode容器--------------------------"
 if [ "$2" = "true" ];then
-    docker run --name cloudnetlotencode -v ${BASE}/cloudnetlotencode/php5:/etc/php/5.6 -v ${BASE}/cloudnetlotencode/php7:/etc/php/7.1 -v ${BASE}/cloudnetlotencode/phpbeast:/usr/local/php-beast-master/tools -v ${BASE}/cloudnetlotencode/encode:/usr/local/encode -v /etc/localtime:/etc/localtime:ro --restart=always -it -d ${imagename}
+    docker run --name cloudnetlotencode -v ${BASE}/cloudnetlotencode/php5:/etc/php/5.6 -v ${BASE}/cloudnetlotencode/php7:/etc/php/7.1 -v ${BASE}/cloudnetlotencode/phpbeast:/usr/local/php-beast-master/tools -v ${BASE}/cloudnetlotencode/encode:/usr/local/encode -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename}
 else
-    docker run --name cloudnetlotencode -v ${BASE}/cloudnetlotencode/encode:/usr/local/encode -v /etc/localtime:/etc/localtime:ro --restart=always -it -d ${imagename}
+    docker run --name cloudnetlotencode -v ${BASE}/cloudnetlotencode/encode:/usr/local/encode -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename}
 fi

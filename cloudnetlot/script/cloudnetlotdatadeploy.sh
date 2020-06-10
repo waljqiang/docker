@@ -52,7 +52,7 @@ fi
 echo "----------------------------------运行cloudnetlotdata容器--------------------------"
 
 if [ "$2" = "true" ];then
-    docker run --name cloudnetlotdata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -v ${BASE}/cloudnetlotdata/mysql/conf:/etc/mysql -v ${BASE}/cloudnetlotdata/mysql/data:/var/lib/mysql -v ${BASE}/cloudnetlotdata/redis/:/etc/redis -v ${BASE}/cloudnetlotdata/emqttd:/etc/emqttd -v /etc/localtime:/etc/localtime:ro --restart=always -it -d ${imagename}
+    docker run --name cloudnetlotdata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -v ${BASE}/cloudnetlotdata/mysql/conf:/etc/mysql -v ${BASE}/cloudnetlotdata/mysql/data:/var/lib/mysql -v ${BASE}/cloudnetlotdata/redis/:/etc/redis -v ${BASE}/cloudnetlotdata/emqttd:/etc/emqttd -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename}
 else
-    docker run --name cloudnetlotdata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -v ${BASE}/cloudnetlotdata/mysql/data:/var/lib/mysql-v /etc/localtime:/etc/localtime:ro --restart=always -it -d ${imagename}
+    docker run --name cloudnetlotdata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -v ${BASE}/cloudnetlotdata/mysql/data:/var/lib/mysql-v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename}
 fi

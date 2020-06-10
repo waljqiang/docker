@@ -56,7 +56,7 @@ fi
 echo '123456' | passwd ftpuser --stdin  &>/dev/null
 
 if [ "$2" = "true" ];then
-    docker run -d --name cloudnetlotvsftpd -p 20:20 -p 21:21 -p 21100-21110:21100-21110 -v /home/vsftpd:/home/vsftpd -v ${BASE}/cloudnetlotvsftpd:/etc/vsftpd -v /etc/localtime:/etc/localtime:ro -e FTP_USER=ftpuser -e FTP_PASS=123456 -e PASV_ADDRESS=$1 -e PASV_MIN_PORT=21100 -e PASV_MAX_PORT=21110  --restart=always ${imagename}
+    docker run -d --name cloudnetlotvsftpd -p 20:20 -p 21:21 -p 21100-21110:21100-21110 -v /home/vsftpd:/home/vsftpd -v ${BASE}/cloudnetlotvsftpd:/etc/vsftpd -v /etc/localtime:/etc/localtime:ro -e FTP_USER=ftpuser -e FTP_PASS=123456 -e PASV_ADDRESS=$1 -e PASV_MIN_PORT=21100 -e PASV_MAX_PORT=21110  --restart=no ${imagename}
 else
-    docker run -d --name cloudnetlotvsftpd -p 20:20 -p 21:21 -p 21100-21110:21100-21110 -v /home/vsftpd:/home/vsftpd -v /etc/localtime:/etc/localtime:ro -e FTP_USER=ftpuser -e FTP_PASS=123456 -e PASV_ADDRESS=$1 -e PASV_MIN_PORT=21100 -e PASV_MAX_PORT=21110  --restart=always ${imagename}
+    docker run -d --name cloudnetlotvsftpd -p 20:20 -p 21:21 -p 21100-21110:21100-21110 -v /home/vsftpd:/home/vsftpd -v /etc/localtime:/etc/localtime:ro -e FTP_USER=ftpuser -e FTP_PASS=123456 -e PASV_ADDRESS=$1 -e PASV_MIN_PORT=21100 -e PASV_MAX_PORT=21110  --restart=no ${imagename}
 fi

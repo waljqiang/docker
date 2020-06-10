@@ -43,7 +43,7 @@ fi
 echo "----------------------------------运行cloudnetlotdaemon容器--------------------------"
 
 if [ "$2" = "true" ];then
-    docker run --name cloudnetlotdaemon -p 9091:9091 -p 9092:9092 -p 9093:9093 -v ${BASE}/cloudnetlotdaemon/php:/etc/php/7.1.20 -v ${BASE}/www/cloudnetlotdaemon:/usr/local/www/cloudnetlotdaemon -v /etc/localtime:/etc/localtime:ro --restart=always -it -d ${imagename}
+    docker run --name cloudnetlotdaemon -p 9091:9091 -p 9092:9092 -p 9093:9093 -v ${BASE}/cloudnetlotdaemon/php:/etc/php/7.1.20 -v ${BASE}/www/cloudnetlotdaemon:/usr/local/www/cloudnetlotdaemon -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename}
 else
-    docker run --name cloudnetlotdaemon -p 9091:9091 -p 9092:9092 -p 9093:9093 -v ${BASE}/www/cloudnetlotdaemon:/usr/local/www/cloudnetlotdaemon -v /etc/localtime:/etc/localtime:ro --restart=always -it -d ${imagename}
+    docker run --name cloudnetlotdaemon -p 9091:9091 -p 9092:9092 -p 9093:9093 -v ${BASE}/www/cloudnetlotdaemon:/usr/local/www/cloudnetlotdaemon -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename}
 fi
