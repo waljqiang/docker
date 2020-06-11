@@ -1,4 +1,17 @@
 #!/bin/bash
+#
+### BEGIN INIT INFO
+# Provides:          dockerserver
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Should-Start:      $network $time
+# Should-Stop:       $network $time
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start and stop the docker server
+# Description:       
+### END INIT INFO
+#
 BASE="/usr/local/cloudnetlot"
 startServer(){
     tmp=`docker ps |grep "$1"`
@@ -8,7 +21,7 @@ startServer(){
 	tmp=`docker ps -a | grep "$1"`
 	if [ ! -z "$tmp" ];then
 	    if [[ "$1" = "cloudnetlotdaemon" ]] && [[ -f "$2/www/cloudnetlotdaemon/bin/start_swoole_server.php" ]];then
-		docker start $1 && docker exec -it cloudnetlotdaemon /bin/bash -c "php /usr/local/www/cloudnetlotdaemon/bin/start_swoole_server.php start -d"
+		docker start $1 && docker exec -i cloudnetlotdaemon /bin/bash -c "php /usr/local/www/cloudnetlotdaemon/bin/start_swoole_server.php start -d"
 	    else
 	        docker start $1
 	    fi
@@ -24,7 +37,7 @@ restartServer(){
 	tmp=`docker ps | grep "$1"`
 	if [ ! -z "$tmp" ];then
 	    if [[ "$1" == "cloudnetlotdaemon" ]] && [[ -f "$2/www/cloudnetlotdaemon/bin/start_swoole_server.php" ]];then
-		docker restart $1 && docker exec -it cloudnetlotdaemon /bin/bash -c "php /usr/local/www/cloudnetlotdaemon/bin/start_swoole_server.php start -d"
+		docker restart $1 && docker exec -i cloudnetlotdaemon /bin/bash -c "php /usr/local/www/cloudnetlotdaemon/bin/start_swoole_server.php start -d"
 	    else
 	        docker restart $1
 	    fi

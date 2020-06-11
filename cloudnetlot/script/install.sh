@@ -27,3 +27,12 @@ ${BIN_PATH}/dockerinstall.sh
 
 echo '-----------------部署环境-----------------------'
 ${BIN_PATH}/dockerdeploy.sh "$1" "$2" "$3" "$4" "$5" "$6" "$7"
+
+echo '-----------------添加开机启动-------------------'
+cd /etc/init.d
+cp -p ${BIN_PATH}/dockerserver ./
+chmod 755 ./dockerserver
+update-rc.d dockerserver defaults 99
+
+echo '----------------complete-------------------------'
+
