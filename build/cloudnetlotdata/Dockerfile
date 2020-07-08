@@ -17,8 +17,8 @@ ADD ./redis/redis-4.0.8.tar.gz ./redis
 ADD ./redis/jemalloc-4.2.1.tar.bz2 ./
 COPY ./redis/redis.conf ./redis
 COPY ./redis /etc/init.d/
-COPY ./emqttd/emqttd-debian8-v2.3.11_amd64.deb ./emqttd/
-COPY ./emqttd/emqttdconf.tar.gz ./emqttd/
+COPY ./emqx/emqx-debian8-v4.0.0_amd64.deb ./emqx/
+COPY ./emqx/emqxconf.tar.gz ./emqx/
 COPY ./script/supervisord.conf /usr/local/
 COPY ./script/start.sh /usr/local/
 
@@ -55,10 +55,10 @@ RUN	cd /usr/local/docker/jemalloc-4.2.1 \
 	&& ln -s /usr/local/redis-4.0.8/bin/redis-cli /usr/bin/redis-cli \
 	&& chmod +x /etc/init.d/redis
 
-#emqttd
-RUN cd ./emqttd \
-	&& dpkg -i  emqttd-debian8-v2.3.11_amd64.deb \
-	&& tar zvxf /usr/local/docker/emqttd/emqttdconf.tar.gz -C /etc/emqttd
+#emqx
+RUN cd ./emqx \
+	&& dpkg -i  emqx-debian8-v4.0.0_amd64.deb \
+	&& tar zvxf /usr/local/docker/emqx/emqxconf.tar.gz -C /etc/emqx
 
 #clear
 RUN rm -rf /usr/local/docker \
