@@ -165,7 +165,7 @@
         ```
         mysql5.7.22(root/admin@123)
         redis4.0.8(1f494c4e0df9b837dbcc82eebed35ca3f2ed3fc5f6428d75bb542583fda2170f)
-        emqttd2.3.11(admin/public)
+        emqx4.0.0(admin/public)
         ```
 
     2.对外端口：
@@ -185,7 +185,7 @@
 * 运行镜像
 
     ```
-    docker run --name cloudnetlotdata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -v /usr/local/cloudnetlot/cloudnetlotdata/mysql/conf:/etc/mysql -v /usr/local/cloudnetlot/cloudnetlotdata/mysql/data:/var/lib/mysql -v /usr/local/cloudnetlot/cloudnetlotdata/redis/:/etc/redis -v /usr/local/cloudnetlot/cloudnetlotdata/emqttd:/etc/emqttd -v /etc/localtime:/etc/localtime:ro --restart=always -it -d waljqiang/cloudnetlotdata:3.0.0
+    docker run --name cloudnetlotdata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -v /usr/local/cloudnetlot/cloudnetlotdata/mysql/conf:/etc/mysql -v /usr/local/cloudnetlot/cloudnetlotdata/mysql/data:/var/lib/mysql -v /usr/local/cloudnetlot/cloudnetlotdata/redis/:/etc/redis -v /usr/local/cloudnetlot/cloudnetlotdata/emqx:/etc/emqx -v /etc/localtime:/etc/localtime:ro --restart=always -it -d waljqiang/cloudnetlotdata:3.0.0
     ```
 
 * 备注

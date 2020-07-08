@@ -11,7 +11,7 @@
 --cloudnetlotdaemon----------------------cloudnetlotdaemon服务器相关
 ------php----------------------------cloudnetlotdaemon服务器的php配置
 --cloudnetlotdata------------------------cloudnetlotdata服务器相关
-------emqttd-------------------------cloudnetlotdata服务器中emqttd配置
+------emqx-------------------------cloudnetlotdata服务器中emqx配置
 ------mysql--------------------------
 -----------conf----------------------cloudnetlotdata服务器中mysql配置
 -----------data----------------------cloudnetlotdata服务器中mysql数据
@@ -69,7 +69,7 @@
     cloudnetlotdata
         mysql5.7.22(root/admin@123)
         redis4.0.8(1f494c4e0df9b837dbcc82eebed35ca3f2ed3fc5f6428d75bb542583fda2170f)
-        emqttd2.3.11(admin/public)
+        emqx4.0.0(admin/public)
     cloudnetlotdaemon
         php7.1.20
         swoole4.1.0 
