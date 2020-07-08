@@ -58,7 +58,9 @@ RUN	cd /usr/local/docker/jemalloc-4.2.1 \
 #emqx
 RUN cd ./emqx \
 	&& dpkg -i  emqx-debian8-v4.0.0_amd64.deb \
-	&& tar zvxf /usr/local/docker/emqx/emqxconf.tar.gz -C /etc/emqx
+	&& tar zvxf /usr/local/docker/emqx/emqxconf.tar.gz -C /etc/emqx \
+	&& /etc/init.d/emqx start \
+	&& emqx_ctl plugins load emqx_auth_username
 
 #clear
 RUN rm -rf /usr/local/docker \
