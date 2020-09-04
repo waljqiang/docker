@@ -22,6 +22,9 @@ startServer(){
 	if [ ! -z "$tmp" ];then
 	    if [[ "$1" = "cloudnetlotdaemon" ]] && [[ -f "$2/www/cloudnetlotdaemon/bin/start_swoole_server.php" ]];then
 		docker start $1 && docker exec -i cloudnetlotdaemon /bin/bash -c "php /usr/local/www/cloudnetlotdaemon/bin/start_swoole_server.php start -d"
+	    elif [ "$1" = "cloudnetlotdata" ];then
+		#修正容器中mysql启动异常导致的bug
+		docker start $1 && docker exec -i cloudnetlotdata /bin/bash -c "rm -f /run/redis_6379.pid && /etc/init.d/mysql start && /etc/init.d/redis start && /etc/init.d/emqx start"
 	    else
 	        docker start $1
 	    fi
@@ -38,6 +41,8 @@ restartServer(){
 	if [ ! -z "$tmp" ];then
 	    if [[ "$1" == "cloudnetlotdaemon" ]] && [[ -f "$2/www/cloudnetlotdaemon/bin/start_swoole_server.php" ]];then
 		docker restart $1 && docker exec -i cloudnetlotdaemon /bin/bash -c "php /usr/local/www/cloudnetlotdaemon/bin/start_swoole_server.php start -d"
+	    elif [ "$1" == "cloudnetlotdata" ];then
+		docker restart $1 && docker exec -i cloudnetlotdata /bin/bash -c "rm -f /run/redis_6379.pid && /etc/init.d/mysql start && /etc/init.d/redis start && /etc/init.d/emqx start"
 	    else
 	        docker restart $1
 	    fi

@@ -2,7 +2,7 @@
 # version 2.0.0
 #author waljqiang<waljqiang@163.com>
 
-#base image to use navidonskis/nginx-php5.6
+#base image to use ubuntu:14.04
 FROM ubuntu:14.04
 MAINTAINER waljqiang <waljqiang@163.com>
 
@@ -20,6 +20,7 @@ ADD ./php/php-5.6.38.tar.gz ./
 COPY ./php/php-fpm ./
 COPY ./php/php-fpm.conf ./
 COPY ./php/www.conf ./
+COPY ./php/php.ini ./
 ADD ./php/php-beast-master.tar.gz ./
 ADD ./php/redis-2.2.8.tgz ./
 COPY ./script/supervisord.conf /usr/local/
@@ -68,7 +69,7 @@ RUN echo "include /etc/ld.so.conf.d/*.conf" | sudo tee /etc/ld.so.conf \
 	&& ln -s /usr/local/php/5.6/bin/php-config /usr/local/bin/ \
 	&& ln -s /usr/local/php/5.6/bin/pecl /usr/local/bin/ \
 	&& ln -s /usr/local/php/5.6/bin/php-config /us \
-	&& cp /usr/local/docker/php-5.6.38/php.ini-production /etc/php/5.6/php.ini \
+	&& cp /usr/local/docker/php.ini /etc/php/5.6/php.ini \
 	&& ln -s /etc/php/5.6/php.ini /etc/php/5.6/fpm/php.ini \
 	&& cp /usr/local/docker/php-fpm.conf /etc/php/5.6/fpm/ \
 	&& cp /usr/local/docker/www.conf /etc/php/5.6/fpm/pool.d/ \

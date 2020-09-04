@@ -2,7 +2,7 @@
 # version 1.0.0
 #author waljqiang<waljqiang@163.com>
 
-#base image to use ubuntu:16.04
+#base image to use ubuntu:14.04
 FROM ubuntu:14.04
 MAINTAINER waljqiang <waljqiang@163.com>
 
@@ -18,6 +18,7 @@ COPY v1.2.4.tar.gz ./v1.2.4.tar.gz
 COPY v2.1.1.tar.gz ./v2.1.1.tar.gz
 COPY v4.1.0.tar.gz ./v4.1.0.tar.gz
 COPY install.sh ./install.sh
+COPY php.ini ./php.ini
 ADD php-beast-master.tar.gz ./
 RUN apt-get update \
     && apt-get install -y vim curl\
@@ -30,6 +31,7 @@ RUN apt-get update \
 	&& make \
 	&& make install \
 	&& make clean \
+	&& cp /usr/local/docker/php.ini /etc/php/7.1.20/cli \
 	&& echo -e "; configuration for php beast module\n; priority=10\nbeast.log_file=/var/log/php7-beast.log\nbeast.log_level=ERROR\nextension=beast.so" | sudo tee /etc/php/7.1.20/cli/conf.d/20-beast.ini \
     && rm -rf /usr/local/docker \
     && rm -rf /var/lib/apt/list/* \

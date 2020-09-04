@@ -2,7 +2,7 @@
 # version 3.0.0
 #author waljqiang<waljqiang@163.com>
 
-#base image to use navidonskis/nginx-php5.6
+#base image to use ubuntu:14.04
 FROM ubuntu:14.04
 MAINTAINER waljqiang <waljqiang@163.com>
 
@@ -35,7 +35,7 @@ RUN cd ./mysql \
 	&& dpkg -i mysql-server_*.deb \
 	&& tar zvxf ./mysqlconf.tar.gz -C /etc/mysql \
 	&& tar zvxf ./mysqldata.tar.gz -C /var/lib/mysql \
-	&& chown -R mysql:mysql /var/lib/mysql 
+	&& chown -R mysql:mysql /var/lib/mysql
 
 #redis
 RUN	cd /usr/local/docker/jemalloc-4.2.1 \
@@ -60,7 +60,8 @@ RUN cd ./emqx \
 	&& dpkg -i  emqx-debian8-v4.0.0_amd64.deb \
 	&& tar zvxf /usr/local/docker/emqx/emqxconf.tar.gz -C /etc/emqx \
 	&& /etc/init.d/emqx start \
-	&& emqx_ctl plugins load emqx_auth_username
+	&& sleep 1 \
+	&& emqx_ctl plugins reload emqx_auth_username 
 
 #clear
 RUN rm -rf /usr/local/docker \

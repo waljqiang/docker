@@ -2,7 +2,7 @@
 # version 5.0.0
 #author waljqiang<waljqiang@163.com>
 
-#base image to use navidonskis/nginx-php5.6
+#base image to use ubuntu:14.04
 FROM ubuntu:14.04
 MAINTAINER waljqiang <waljqiang@163.com>
 
