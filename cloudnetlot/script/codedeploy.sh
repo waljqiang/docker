@@ -12,6 +12,9 @@ if [ ! -z "$cloudnetlot" ];then
     chown -R www-data:www-data $root_path/cloudnetlot
     chmod -R 755 $root_path/cloudnetlot
     rm -f $cloudnetlot
+    /usr/local/cloudnetlot/script/dockerserver restart cloudnetlotserver
+    docker exec -it cloudnetlotserver /bin/bash -c 'cd /usr/local/www/cloudnetlot/backend && php artisan migrate'
+    docker exec -it cloudnetlotserver /bin/bash -c 'cd /usr/local/www/cloudnetlot/backend && php artisan db:seed'
 fi
 
 if [ ! -z "$cloudnetlotdaemon" ];then
@@ -23,6 +26,7 @@ if [ ! -z "$cloudnetlotdaemon" ];then
     chown -R www-data:www-data $root_path/cloudnetlotdaemon
     chmod -R 755 $root_path/cloudnetlotdaemon
     rm -f $cloudnetlotdaemon
+    /usr/local/cloudnetlot/script/dockerserver restart cloudnetlotdaemon
 fi
 
 echo "SUCCESS"
