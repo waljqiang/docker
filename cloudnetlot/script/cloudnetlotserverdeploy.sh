@@ -48,7 +48,7 @@ fi
 echo "----------------------------------运行cloudnetlotserver容器--------------------------"
 
 if [ "$2" = "true" ];then
-    docker run --name cloudnetlotserver -p 9090:80 -v ${BASE}/cloudnetlotserver/nginx:/etc/nginx -v ${BASE}/cloudnetlotserver/php:/etc/php/5.6 -v ${BASE}/www:/usr/local/www -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename}
+    docker run --name cloudnetlotserver -p 9090:80 -p 6666:6666 -v ${BASE}/cloudnetlotserver/nginx:/etc/nginx -v ${BASE}/cloudnetlotserver/php:/etc/php/5.6 -v ${BASE}/www:/usr/local/www -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename}
 else
-    docker run --name cloudnetlotserver -p 9090:80 -v ${BASE}/www:/usr/local/www -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename}
+    docker run --name cloudnetlotserver -p 9090:80 -p 6666:6666 -v ${BASE}/www:/usr/local/www -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename}
 fi
