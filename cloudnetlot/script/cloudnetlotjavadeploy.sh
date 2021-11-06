@@ -9,7 +9,7 @@ BIN_PATH=${BASE}/script
 HOST="$1"
 echo "------------------------------部署cloudnetlotjava环境-----------------------------"
 echo "------------------------------清理cloudnetlotjava环境缓存--------------------------"
-tmp1=`docker ps | grep cloudnetlotdaemon`
+tmp1=`docker ps | grep cloudnetlotjava`
 
 if [ ! -z "$tmp1" ];then
     docker stop cloudnetlotjava
