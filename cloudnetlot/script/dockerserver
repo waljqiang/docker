@@ -22,6 +22,8 @@ startServer(){
 	if [ ! -z "$tmp" ];then
 	    if [[ "$1" = "cloudnetlotdaemon" ]] && [[ -f "$2/www/cloudnetlotdaemon/bin/start_swoole_server.php" ]];then
 		docker start $1 && docker exec -i cloudnetlotdaemon /bin/bash -c "php /usr/local/www/cloudnetlotdaemon/bin/start_swoole_server.php start -d"
+	    elif [[ "$1" = "cloudnetlotjava" ]] && [[ -d "$2/www/service_Subscriber" ]];then
+		docker start $1 && docker exec -it cloudnetlotjava /bin/bash -c "/etc/init.d/java_server start"
 	    elif [ "$1" = "cloudnetlotdata" ];then
 		#修正容器中mysql启动异常导致的bug
 		docker start $1 && docker exec -i cloudnetlotdata /bin/bash -c "rm -f /run/redis_6379.pid && /etc/init.d/mysql start && /etc/init.d/redis start && /etc/init.d/emqx start"
@@ -43,6 +45,8 @@ restartServer(){
 	if [ ! -z "$tmp" ];then
 	    if [[ "$1" == "cloudnetlotdaemon" ]] && [[ -f "$2/www/cloudnetlotdaemon/bin/start_swoole_server.php" ]];then
 		docker restart $1 && docker exec -i cloudnetlotdaemon /bin/bash -c "php /usr/local/www/cloudnetlotdaemon/bin/start_swoole_server.php start -d"
+	    elif [[ "$1" == "cloudnetlotjava" ]] && [[ -d "$2/www/service_Subscriber" ]];then
+		docker restart $1 && docker exec -it cloudnetlotjava /bin/bash -c "/etc/init.d/java_server start"
 	    elif [ "$1" == "cloudnetlotdata" ];then
 		docker restart $1 && docker exec -i cloudnetlotdata /bin/bash -c "rm -f /run/redis_6379.pid && /etc/init.d/mysql start && /etc/init.d/redis start && /etc/init.d/emqx start"
 	    elif [ "$1" == "cloudnetlotserver" ];then	
@@ -77,7 +81,7 @@ if [[ "$1" != "start" ]] && [[ "$1" != "stop" ]] && [[ "$1" != "restart" ]];then
     exit
 fi
 
-SERVER=("$2" "$3" "$4" "$5" "$6" "$7")
+SERVER=("$2" "$3" "$4" "$5" "$6" "$7","$8")
 
 case "$1" in
     start)
@@ -85,6 +89,8 @@ case "$1" in
             startServer "cloudnetlotdata"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotdaemon" ]];then
 	    startServer "cloudnetlotdaemon" "${BASE}"
+	elif [[ "${SERVER[@]}" =~ "cloudnetlotjava" ]];then
+	    startServer "cloudnetlotjava" "${BASE}"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotvsftpd" ]];then
 	    startServer "cloudnetlotvsftpd"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotserver" ]];then
@@ -93,8 +99,7 @@ case "$1" in
 	    startServer "cloudnetlotencode"
 	else
 	    startServer "cloudnetlotdata"
-	    sleep 1
-	    startServer "cloudnetlotdaemon" "${BASE}"
+	    startServer "cloudnetlotjava" "${BASE}"
 	    startServer "cloudnetlotvsftpd"
 	    startServer "cloudnetlotserver"
 	    startServer "cloudnetlotencode"
@@ -105,6 +110,8 @@ case "$1" in
 	    restartServer "cloudnetlotdata"
 	elif [[ "${SERVER[@]}" =~ "cloudnetlotdaemon" ]];then
             restartServer "cloudnetlotdaemon" "${BASE}"
+	elif [[ "${SERVER[@]}" =~ "cloudnetlotjava" ]];then
+	    restartServer "cloudnetlotjava" "${BASE}"
         elif [[ "${SERVER[@]}" =~ "cloudnetlotvsftpd" ]];then
             restartServer "cloudnetlotvsftpd" 
         elif [[ "${SERVER[@]}" =~ "cloudnetlotserver" ]];then
@@ -113,8 +120,7 @@ case "$1" in
             restartServer "cloudnetlotencode"
 	else
 	    restartServer "cloudnetlotdata"
-	    sleep 1
-            restartServer "cloudnetlotdaemon" "${BASE}"
+            restartServer "cloudnetlotjava" "${BASE}"
             restartServer "cloudnetlotvsftpd"
             restartServer "cloudnetlotserver"
             restartServer "cloudnetlotencode"
@@ -125,6 +131,8 @@ case "$1" in
             stopServer "cloudnetlotdata"
         elif [[ "${SERVER[@]}" =~ "cloudnetlotdaemon" ]];then
             stopServer "cloudnetlotdaemon"
+	elif [[ "${SERVER[@]}" =~ "cloudnetlotjava" ]];then
+	    stopServer "cloudnetlotjava"
         elif [[ "${SERVER[@]}" =~ "cloudnetlotvsftpd" ]];then
             stopServer "cloudnetlotvsftpd"
         elif [[ "${SERVER[@]}" =~ "cloudnetlotserver" ]];then
@@ -133,7 +141,7 @@ case "$1" in
             stopServer "cloudnetlotencode"
         else
             stopServer "cloudnetlotdata"
-            stopServer "cloudnetlotdaemon"
+	    stopServer "cloudnetlotjava"
             stopServer "cloudnetlotvsftpd"
             stopServer "cloudnetlotserver"
             stopServer "cloudnetlotencode"

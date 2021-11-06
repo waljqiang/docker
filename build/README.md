@@ -278,3 +278,35 @@
     ```
     /usr/local/php/7.1/bin/php /usr/local/php-beast-master/tools/encode_files.php
     ```
+## cloudnetlotjava
+
+* tag命名
+ 
+    cloudnetlotjava镜像以6.x.y命名；x表示大版本，y表示小版本
+
+* build镜像
+ 
+    如果要改动镜像，修改Dockerfile文件，然后从新执行build命令即可。
+
+    ```
+    docker build -t waljqiang/cloudnetlotjava:6.0.0  ./
+    ```
+
+    Dockerfile的from可以基于已有的cloudnetlotdaemon镜像基础做修改,build命令注意镜像的tag需要改动.
+
+* 说明
+ 
+    1.镜像包括以下软件:
+
+        ```
+        jdk1.8.0_301
+        ```
+
+* 运行镜像
+
+    ```
+    docker run --name cloudnetlotjava -v /usr/local/cloudnetlot/www/service_Subscriber:/usr/local/cloudnetlot/www/service_Subscriber -v /etc/localtime:/etc/localtime:ro --restart=no -it -d waljqiang/cloudnetlotjava:6.0.0
+    ```
+
+* 使用
+    用java服务替代了cloudnetlotdaemon项目的php服务

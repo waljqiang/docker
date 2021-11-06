@@ -8,6 +8,7 @@
 --script--------------------------------执行脚本
 --soft-------------------------------镜像存放目录
 --www--------------------------------代码存放目录
+--cloudnetlotjava------------------------cloudnetlotjava服务器相关
 --cloudnetlotdaemon----------------------cloudnetlotdaemon服务器相关
 ------php----------------------------cloudnetlotdaemon服务器的php配置
 --cloudnetlotdata------------------------cloudnetlotdata服务器相关
@@ -57,7 +58,8 @@
 * 服务容器名与服务名对应关系
 ```
     cloudnetlotserver----------------云平台应用服务器
-    cloudnetlotdaemon----------------云平台daemon服务器
+    cloudnetlotdaemon----------------云平台daemon服务器(php版本)
+    cloudnetlotjava------------------云平台daemon服务器(java版本)
     cloudnetlotdata------------------云平台数据层服务器
     cloudnetlotvsftpd----------------云平台vsftpd服务器
     cloudnetlotencode----------------加密代码服务器
@@ -76,6 +78,8 @@
         hiredis0.13.3 
         phpredis3.1.6
         phpinotify2.0.0
+    cloudnetlotjava
+       jdk1.8.0_301
     cloudnetlotvsftpd
         vsftpd3.0(ftpuser/123456)
     cloudnetlotserver
@@ -131,6 +135,7 @@
     ||/etc/localtime|/etc/localtime|
     |cloudnetlotdaemon|cloudnetlotdaemon/php|/etc/php/7.1.20|
     ||www/cloudnetlotdaemon|/usr/local/www/cloudnetlotdaemon|
+    ||www/service_Subscriber|/usr/local/cloudnetlot/www/service_Subscriber|
     ||/etc/localtime|/etc/localtime|
     |cloudnetlotserver|cloudnetlotserver/nginx|/etc/nginx|
     ||cloudnetlotserver/php|/etc/php/5.6|
