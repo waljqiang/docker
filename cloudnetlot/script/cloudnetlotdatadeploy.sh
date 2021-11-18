@@ -1,9 +1,4 @@
 #!/bin/bash
-#$1->主机ip
-if [ -z "$1" ];then
-    echo 'use host ip for first params'
-    exit
-fi
 
 BASE="/usr/local/cloudnetlot"
 BIN_PATH=${BASE}/script
@@ -52,7 +47,7 @@ fi
 echo "----------------------------------运行cloudnetlotdata容器--------------------------"
 echo ${imagename}
 if [ "$2" = "true" ];then
-    docker run --name cloudnetlotdata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -v ${BASE}/cloudnetlotdata/mysql/conf:/etc/mysql -v ${BASE}/cloudnetlotdata/mysql/data:/var/lib/mysql -v ${BASE}/cloudnetlotdata/redis/:/etc/redis -v ${BASE}/cloudnetlotdata/emqx:/etc/emqx -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename} && docker exec -it cloudnetlotdata /bin/bash -c 'sleep 20 && emqx_ctl admins passwd admin 123456 && emqx_ctl plugins reload emqx_auth_mysql'
+    docker run --name cloudnetlotdata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -p 9100:8883 -v ${BASE}/cloudnetlotdata/mysql/conf:/etc/mysql -v ${BASE}/cloudnetlotdata/mysql/data:/var/lib/mysql -v ${BASE}/cloudnetlotdata/redis/:/etc/redis -v ${BASE}/cloudnetlotdata/emqx:/etc/emqx -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename} && docker exec -it cloudnetlotdata /bin/bash -c 'sleep 20 && emqx_ctl admins passwd admin 123456 && emqx_ctl plugins reload emqx_auth_mysql'
 else
-    docker run --name cloudnetlotdata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -v ${BASE}/cloudnetlotdata/mysql/data:/var/lib/mysql -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename} && docker exec -it cloudnetlotdata /bin/bash -c 'sleep 20 && emqx_ctl admins passwd admin 123456 && emqx_ctl plugins reload emqx_auth_mysql'
+    docker run --name cloudnetlotdata -p 9094:3306 -p 9095:6379 -p 9096:1883 -p 9097:8084 -p 9098:8083 -p 9099:18083 -p 9100:8883 -v ${BASE}/cloudnetlotdata/mysql/data:/var/lib/mysql -v /etc/localtime:/etc/localtime:ro --restart=no -it -d ${imagename} && docker exec -it cloudnetlotdata /bin/bash -c 'sleep 20 && emqx_ctl admins passwd admin 123456 && emqx_ctl plugins reload emqx_auth_mysql'
 fi
