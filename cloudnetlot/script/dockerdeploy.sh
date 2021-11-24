@@ -25,7 +25,7 @@ fi
 if [[ "${SERVER[@]}" =~ "cloudnetlotdaemon" ]];then
     ${BIN_PATH}/cloudnetlotdaemondeploy.sh "$1" "$CONFIGMAP"
 fi
-cloudnetlotvsftpd
+#cloudnetlotvsftpd
 if [[ "${SERVER[@]}" =~ "cloudnetlotvsftpd" ]];then
     ${BIN_PATH}/cloudnetlotvsftpddeploy.sh "$1" "$CONFIGMAP"
 fi
@@ -33,11 +33,11 @@ fi
 if [[ "${SERVER[@]}" =~ "cloudnetlotserver" ]];then
     ${BIN_PATH}/cloudnetlotserverdeploy.sh "$1" "$CONFIGMAP" "$WITHSSL"
 fi
-cloudnetlotencode
+#cloudnetlotencode
 if [[ "${SERVER[@]}" =~ "cloudnetlotencode" ]];then
     ${BIN_PATH}/cloudnetlotencodedeploy.sh "$1" "$CONFIGMAP"
 fi
-cloudnetlotjava
+#cloudnetlotjava
 if [[ "${SERVER[@]}" =~ "cloudnetlotjava" ]];then
     ${BIN_PATH}/cloudnetlotjavadeploy.sh "$1" "$CONFIGMAP"
 fi
